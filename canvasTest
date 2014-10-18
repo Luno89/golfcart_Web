@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style src='script/canvas.js'></style>
+  </head>
+  <body>
+	  <canvas id='canvas' height='800' width='800'></canvas>
+  </body>
+  <script src='script/canvas.js'></script>
+  <script>init('canvas')</script>
+</html>

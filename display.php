@@ -31,6 +31,7 @@ function display()
       context.stroke();
     </script>
   </body>
+  <script scr=''></script>
 </html>  
 
 <?php
