@@ -86,9 +86,14 @@ function triangle() {
 
 /************************ Animation Def *******************************/
 
-function render() {
-	this.objList = null;
-	this.
+function render(context) {
+	this.objList = [];
+	this.context = context;
+	this.draw = function() {
+		for(var i = 0; i < this.objList.length; i++) {
+			this.objList[i].draw(this.context);
+		}
+	}
 }
 
 function animationProperty() {
@@ -97,7 +102,29 @@ function animationProperty() {
 
 /************************ Mouse Def ***********************************/
 
+function mouse() {
+	
+}
+
 /************************ Start Up Def ********************************/
+
+function initTriangleCoords(width, height) {
+	var margin = 10;
+	var statusOffset = 100;
+	
+	var offsetHeight = height - statusOffset;
+	var y = statusOffset + (offsetHeight / 2);
+	
+	var halfScreen = width / 2;
+	var tempMag = ((offsetHeight / 2) - margin)
+	
+	var forward = {x: halfScreen / 2, y: statusOffset + margin, magnitude: tempMag, angle: 90};
+	var back = {x: halfScreen / 2, y: height - margin, magnitude: tempMag, angle: 270};
+	var left = {x: width - 2*tempMag - 2*margin, y: y, magnitude: tempMag, angle: 0};
+	var right = {x: width - margin, y: y, magnitude: tempMag, angle: 180};
+	
+	return [forward,back,left,right];
+}
 
 function init(elementId) {
 	var canvas = document.getElementById(elementId);
@@ -108,11 +135,22 @@ function init(elementId) {
 	var width = getWidth(canvas);
 	var height = getHeight(canvas);
 	
-	var tempTriangle = new triangle();
+	var coords = initTriangleCoords(width, height);
+	
+	var renderer = new render(context);
+	for (var i = 0; i < coords.length; i++) {
+		renderer.objList[i] = new triangle;
+		var temp = coords[i];
+		renderer.objList[i].create(temp.x,temp.y,temp.magnitude,'black', toRadians(temp.angle));
+	}
+	
+	renderer.draw();
+	
+	/*var tempTriangle = new triangle();
 	tempTriangle.create(100, 200, 50, 'black', toRadians(0));
 	tempTriangle.draw(context);
 	
 	var otherTriangle = new triangle();
 	otherTriangle.create(200, 200, 50, 'black', toRadians(180));
-	otherTriangle.draw(context);
+	otherTriangle.draw(context);*/
 }
